@@ -1,0 +1,18 @@
+[Unit]
+Description=PatchPilot Automated Package & Security Maintenance
+Documentation=https://github.com/example/patchpilot
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=/etc/patchpilot/patchpilot.conf
+
+[Service]
+Type=oneshot
+User=root
+Group=root
+TimeoutStartSec=1800
+ExecStart=/opt/patchpilot/bin/patchpilot-agent.sh --apply-security
+StandardOutput=journal+console
+StandardError=journal+console
+
+[Install]
+WantedBy=multi-user.target

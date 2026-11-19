@@ -1,0 +1,38 @@
+{
+  "patchpilot_version": "1.0.0",
+  "report_type": "compliance",
+  "generated_at": "2026-11-19T18:00:00+05:30",
+  "hostname": "web01.example.com",
+  "group": "webservers",
+  "system": {
+    "os": "Ubuntu 22.04.4 LTS",
+    "os_id": "ubuntu",
+    "kernel": "5.15.0-105-generic",
+    "architecture": "x86_64",
+    "cpu": "Intel(R) Xeon(R) Platinum 8375C CPU @ 2.90GHz",
+    "memory_total": "16Gi",
+    "disk_free_root": "48G",
+    "uptime": "up 14 days, 3 hours",
+    "last_boot": "2026-11-05 08:30"
+  },
+  "patching": {
+    "package_manager": "apt (Debian/Ubuntu)",
+    "total_installed_packages": 1420,
+    "pending_updates": 0,
+    "pending_security_updates": 0,
+    "last_patch_run": "2026-11-18 02:15:30",
+    "reboot_required": false
+  },
+  "compliance": {
+    "score": 100,
+    "grade": "A (Excellent)",
+    "fully_patched": true,
+    "security_compliant": true,
+    "reboot_pending": false
+  },
+  "patch_history_logs": [
+    "patch_web01.example.com_20261118_020000.log",
+    "patch_web01.example.com_20261111_020000.log",
+    "patch_web01.example.com_20261104_020000.log"
+  ]
+}

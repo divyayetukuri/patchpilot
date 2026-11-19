@@ -1,0 +1,38 @@
+{
+  "patchpilot_version": "1.0.0",
+  "report_type": "compliance",
+  "generated_at": "2026-11-19T18:00:00+05:30",
+  "hostname": "app02.example.com",
+  "group": "appservers",
+  "system": {
+    "os": "CentOS Stream 9",
+    "os_id": "centos",
+    "kernel": "5.14.0-412.el9.x86_64",
+    "architecture": "x86_64",
+    "cpu": "Intel(R) Xeon(R) Platinum 8375C CPU @ 2.90GHz",
+    "memory_total": "16Gi",
+    "disk_free_root": "48G",
+    "uptime": "up 14 days, 3 hours",
+    "last_boot": "2026-11-05 08:30"
+  },
+  "patching": {
+    "package_manager": "dnf (RHEL/Fedora)",
+    "total_installed_packages": 1220,
+    "pending_updates": 4,
+    "pending_security_updates": 0,
+    "last_patch_run": "2026-11-15 02:11:12",
+    "reboot_required": false
+  },
+  "compliance": {
+    "score": 80,
+    "grade": "B (Good)",
+    "fully_patched": false,
+    "security_compliant": true,
+    "reboot_pending": false
+  },
+  "patch_history_logs": [
+    "patch_app02.example.com_20261118_020000.log",
+    "patch_app02.example.com_20261111_020000.log",
+    "patch_app02.example.com_20261104_020000.log"
+  ]
+}

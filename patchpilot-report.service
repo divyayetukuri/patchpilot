@@ -1,0 +1,18 @@
+# =============================================================================
+# PatchPilot — patchpilot-report.service
+# systemd service for generating compliance reports
+# =============================================================================
+[Unit]
+Description=PatchPilot Compliance Report Generator
+After=patchpilot.service
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/usr/local/bin/compliance_report.sh both
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=patchpilot-report
+
+[Install]
+WantedBy=multi-user.target

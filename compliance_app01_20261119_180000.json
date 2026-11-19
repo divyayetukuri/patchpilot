@@ -1,0 +1,38 @@
+{
+  "patchpilot_version": "1.0.0",
+  "report_type": "compliance",
+  "generated_at": "2026-11-19T18:00:00+05:30",
+  "hostname": "app01.example.com",
+  "group": "appservers",
+  "system": {
+    "os": "Debian GNU/Linux 12 (bookworm)",
+    "os_id": "debian",
+    "kernel": "6.1.0-18-amd64",
+    "architecture": "x86_64",
+    "cpu": "Intel(R) Xeon(R) Platinum 8375C CPU @ 2.90GHz",
+    "memory_total": "16Gi",
+    "disk_free_root": "48G",
+    "uptime": "up 14 days, 3 hours",
+    "last_boot": "2026-11-05 08:30"
+  },
+  "patching": {
+    "package_manager": "apt (Debian/Ubuntu)",
+    "total_installed_packages": 1305,
+    "pending_updates": 14,
+    "pending_security_updates": 6,
+    "last_patch_run": "2026-10-28 02:10:00",
+    "reboot_required": true
+  },
+  "compliance": {
+    "score": 30,
+    "grade": "F (Critical)",
+    "fully_patched": false,
+    "security_compliant": false,
+    "reboot_pending": true
+  },
+  "patch_history_logs": [
+    "patch_app01.example.com_20261118_020000.log",
+    "patch_app01.example.com_20261111_020000.log",
+    "patch_app01.example.com_20261104_020000.log"
+  ]
+}

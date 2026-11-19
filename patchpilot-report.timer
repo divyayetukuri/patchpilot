@@ -1,0 +1,16 @@
+# =============================================================================
+# PatchPilot — patchpilot-report.timer
+# Generates compliance report daily at 06:00
+# =============================================================================
+[Unit]
+Description=PatchPilot Daily Compliance Report Timer
+Requires=patchpilot-report.service
+
+[Timer]
+OnCalendar=*-*-* 06:00:00
+Persistent=true
+RandomizedDelaySec=600
+Unit=patchpilot-report.service
+
+[Install]
+WantedBy=timers.target

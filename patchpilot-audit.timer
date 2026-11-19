@@ -1,0 +1,15 @@
+[Unit]
+Description=Daily Scheduled Trigger for PatchPilot Audit Service
+Documentation=https://github.com/example/patchpilot
+
+[Timer]
+# Run daily at 02:00 AM local time
+OnCalendar=*-*-* 02:00:00
+# Spread execution randomly within 30 minutes to distribute repo mirror network load
+RandomizedDelaySec=1800
+# Run immediately upon boot if the timer event was missed while powered off
+Persistent=true
+Unit=patchpilot-audit.service
+
+[Install]
+WantedBy=timers.target

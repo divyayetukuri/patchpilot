@@ -1,0 +1,19 @@
+[Unit]
+Description=PatchPilot Local Compliance & Vulnerability Audit
+Documentation=https://github.com/example/patchpilot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+Group=root
+ExecStartPre=/usr/bin/mkdir -p /var/log/patchpilot
+ExecStart=/bin/bash -c '/opt/patchpilot/bin/patchpilot-agent.sh --audit --json > /var/log/patchpilot/last_audit.json'
+StandardOutput=journal
+StandardError=journal
+Nice=19
+IOSchedulingClass=idle
+
+[Install]
+WantedBy=multi-user.target

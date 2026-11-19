@@ -1,0 +1,12 @@
+[Unit]
+Description=Weekly Maintenance Window Trigger for PatchPilot
+Documentation=https://github.com/example/patchpilot
+
+[Timer]
+# Trigger during weekend maintenance window: Sunday at 03:30 AM
+OnCalendar=Sun *-*-* 03:30:00
+Persistent=false
+Unit=patchpilot-patch.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,23 @@
+# =============================================================================
+# PatchPilot — patchpilot.timer
+# systemd timer — runs weekly at Sunday 02:00
+# =============================================================================
+[Unit]
+Description=PatchPilot Weekly Patch Timer
+Documentation=https://github.com/yourorg/patchpilot
+Requires=patchpilot.service
+
+[Timer]
+# Every Sunday at 02:00 local time
+OnCalendar=Sun *-*-* 02:00:00
+
+# Run immediately if the last scheduled run was missed
+Persistent=true
+
+# Randomize start by up to 30 minutes to avoid fleet thundering-herd
+RandomizedDelaySec=1800
+
+Unit=patchpilot.service
+
+[Install]
+WantedBy=timers.target

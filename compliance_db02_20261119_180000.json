@@ -1,0 +1,38 @@
+{
+  "patchpilot_version": "1.0.0",
+  "report_type": "compliance",
+  "generated_at": "2026-11-19T18:00:00+05:30",
+  "hostname": "db02.example.com",
+  "group": "dbservers",
+  "system": {
+    "os": "Red Hat Enterprise Linux 9.3",
+    "os_id": "rhel",
+    "kernel": "5.14.0-362.8.1.el9_3.x86_64",
+    "architecture": "x86_64",
+    "cpu": "Intel(R) Xeon(R) Platinum 8375C CPU @ 2.90GHz",
+    "memory_total": "16Gi",
+    "disk_free_root": "48G",
+    "uptime": "up 14 days, 3 hours",
+    "last_boot": "2026-11-05 08:30"
+  },
+  "patching": {
+    "package_manager": "dnf (RHEL/Fedora)",
+    "total_installed_packages": 1175,
+    "pending_updates": 2,
+    "pending_security_updates": 2,
+    "last_patch_run": "2026-11-12 02:18:40",
+    "reboot_required": true
+  },
+  "compliance": {
+    "score": 50,
+    "grade": "D (Poor)",
+    "fully_patched": false,
+    "security_compliant": false,
+    "reboot_pending": true
+  },
+  "patch_history_logs": [
+    "patch_db02.example.com_20261118_020000.log",
+    "patch_db02.example.com_20261111_020000.log",
+    "patch_db02.example.com_20261104_020000.log"
+  ]
+}

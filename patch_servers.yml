@@ -1,0 +1,80 @@
+---
+# =============================================================================
+# PatchPilot - Ansible Playbook
+# patch_servers.yml — Orchestrates patching across all managed hosts
+# =============================================================================
+- name: PatchPilot — Automated Patch Management
+  hosts: "{{ target_hosts | default('all') }}"
+  become: true
+  serial: "{{ patch_serial | default('30%') }}"   # Roll 30% at a time
+  max_fail_percentage: 20
+
+  vars:
+    patchpilot_version: "1.0.0"
+    report_dir: "/var/lib/patchpilot/reports"
+    log_dir: "/var/log/patchpilot"
+    security_only: false
+    auto_reboot: false
+    reboot_timeout: 300    # seconds to wait after reboot
+    pre_patch_snapshot: false
+
+  pre_tasks:
+    - name: Display patch run banner
+      debug:
+        msg: |
+          ═══════════════════════════════════════════
+            PatchPilot v{{ patchpilot_version }}
+            Host   : {{ inventory_hostname }}
+            OS     : {{ ansible_distribution }} {{ ansible_distribution_version }}
+            Kernel : {{ ansible_kernel }}
+            Mode   : {{ 'Security Only' if security_only else 'Full Update' }}
+          ═══════════════════════════════════════════
+
+    - name: Ensure PatchPilot directories exist
+      file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0750'
+        owner: root
+        group: root
+      loop:
+        - "{{ report_dir }}"
+        - "{{ log_dir }}"
+
+    - name: Collect pre-patch package facts
+      package_facts:
+        manager: auto
+
+    - name: Record pre-patch installed package count
+      set_fact:
+        pre_patch_pkg_count: "{{ ansible_facts.packages | length }}"
+
+  roles:
+    - role: patchpilot
+
+  post_tasks:
+    - name: Collect post-patch package facts
+      package_facts:
+        manager: auto
+
+    - name: Compute packages updated
+      set_fact:
+        packages_updated_count: >-
+          {{ ansible_facts.packages | length - pre_patch_pkg_count | int }}
+
+    - name: Write final compliance report (JSON)
+      template:
+        src: compliance_report.json.j2
+        dest: "{{ report_dir }}/ansible_compliance_{{ inventory_hostname }}_{{ ansible_date_time.iso8601_basic_short }}.json"
+        mode: '0640'
+
+    - name: Fetch reports to controller
+      fetch:
+        src: "{{ report_dir }}/ansible_compliance_{{ inventory_hostname }}_{{ ansible_date_time.iso8601_basic_short }}.json"
+        dest: "./reports/{{ inventory_hostname }}/"
+        flat: true
+      ignore_errors: true
+
+    - name: Summary message
+      debug:
+        msg: "✓ Patching complete on {{ inventory_hostname }} | Pkgs updated: {{ packages_updated_count }} | Reboot: {{ reboot_required | default(false) }}"
